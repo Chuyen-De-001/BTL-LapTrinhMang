@@ -31,10 +31,8 @@ public class Client extends JFrame {
 			public void run() {
 				try {
 					socket = new Socket("localhost", Server.SERVER_PORT);
-					dataInputStream = new DataInputStream(
-							socket.getInputStream());
-					dataOutputStream = new DataOutputStream(
-							socket.getOutputStream());
+					dataInputStream = new DataInputStream(socket.getInputStream());
+					dataOutputStream = new DataOutputStream(socket.getOutputStream());
 					Client frame = new Client();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -54,12 +52,10 @@ public class Client extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0,
-				Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0,
-				Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 		JButton btnTop = new JButton("Top");
@@ -122,7 +118,7 @@ public class Client extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					sendAction(SocketSever.ACTION_BOTTOM);
+					sendAction(SocketSever.ACTION_LEFT);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -141,7 +137,6 @@ public class Client extends JFrame {
 				}
 			}
 		});
-
 	}
 
 	public void sendAction(int action) throws IOException {

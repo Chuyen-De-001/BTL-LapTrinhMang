@@ -1,19 +1,16 @@
 package Bai3;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.io.IOException;
-import java.net.ServerSocket;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Server extends JFrame {
+public class TestUI extends JFrame {
+
 	private JPanel contentPane;
-	static JButton btnAgent;
-	static int SERVER_PORT = 3000;
-	static ServerSocket serverSocket;
+
 	/**
 	 * Launch the application.
 	 */
@@ -21,13 +18,8 @@ public class Server extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					serverSocket = new ServerSocket(SERVER_PORT);
-					Server frame = new Server();
+					TestUI frame = new TestUI();
 					frame.setVisible(true);
-					SocketSever server = new SocketSever();
-					server.setServerSocket(serverSocket);
-					server.setBtnAgent(btnAgent);
-					server.start();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,19 +29,14 @@ public class Server extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @throws IOException
 	 */
-	public Server() throws IOException {
+	public TestUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		btnAgent = new JButton("Agent");
-		btnAgent.setSize(100, 50);
-		contentPane.add(btnAgent);
-		
 	}
+
 }

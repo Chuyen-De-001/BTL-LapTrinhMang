@@ -14,6 +14,9 @@ public class SocketSever extends Thread {
 	final static int ACTION_LEFT = 1;
 	final static int ACTION_RIGHT = 2;
 	final static int ACTION_BOTTOM = 3;
+	final static int STEP = 50;
+	static int VERTICAL;
+	static int HORIZONTAL;
 
 	static JButton btnAgent;
 
@@ -38,29 +41,39 @@ public class SocketSever extends Thread {
 		System.out.println("SERVER RUNNING...");
 		try {
 			socket = serverSocket.accept();
-			DataInputStream dataInputStream = new DataInputStream(
-					socket.getInputStream());
-			DataOutputStream dataOutpuStream = new DataOutputStream(
-					socket.getOutputStream());
+			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+			DataOutputStream dataOutpuStream = new DataOutputStream(socket.getOutputStream());
 			while (true) {
 				int input = Integer.parseInt(dataInputStream.readUTF());
-
+				int vertical;
+				int horizontal;
 				switch (input) {
-					case ACTION_TOP :
-						System.out.println("Top");
-						break;
-					case ACTION_LEFT :
-						System.out.println("Left");
-						break;
-					case ACTION_RIGHT :
-						System.out.println("Right");
-						break;
-					case ACTION_BOTTOM :
-						System.out.println("Bottom");
-						break;
-
-					default :
-						break;
+				case ACTION_TOP:
+					vertical = btnAgent.getBounds().y - STEP;
+					btnAgent.setBounds(btnAgent.getBounds().x, vertical, btnAgent.getBounds().width,
+							btnAgent.getBounds().height);
+					System.out.println("Top");
+					break;
+				case ACTION_LEFT:
+					horizontal = btnAgent.getBounds().x - STEP;
+					btnAgent.setBounds(horizontal, btnAgent.getBounds().y, btnAgent.getBounds().width,
+							btnAgent.getBounds().height);
+					System.out.println("Left");
+					break;
+				case ACTION_RIGHT:
+					horizontal = btnAgent.getBounds().x + STEP;
+					btnAgent.setBounds(horizontal, btnAgent.getBounds().y, btnAgent.getBounds().width,
+							btnAgent.getBounds().height);
+					System.out.println("Right");
+					break;
+				case ACTION_BOTTOM:
+					vertical = btnAgent.getBounds().y + STEP;
+					btnAgent.setBounds(btnAgent.getBounds().x, vertical, btnAgent.getBounds().width,
+							btnAgent.getBounds().height);
+					System.out.println("Bottom");
+					break;
+				default:
+					break;
 				}
 
 				System.out.println(input);
@@ -71,4 +84,5 @@ public class SocketSever extends Thread {
 		}
 
 	}
+
 }
